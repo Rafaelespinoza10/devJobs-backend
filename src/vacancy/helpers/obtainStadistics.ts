@@ -32,6 +32,9 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
     try {
         const response = await axios.post(`${baseUrl}/information-cv`, { url: urlComplete,});
         console.log('data', response.data);
+        if (!response || !response.data) {
+            throw new Error(`Respuesta inesperada del servidor: ${response}`);
+        }
         return response.data;
     } catch (error: any) {
         throw error.message;

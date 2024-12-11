@@ -153,11 +153,11 @@ export class VacancyService {
             }
     
             const responses = await Promise.all(
-                candidates.map(candidate => {
+                candidates.map(async candidate => {
                     if (!candidate.cv) {
                         throw new Error(`El candidato ${candidate.name} no tiene un CV válido`);
                     }
-                    const response  = sendCvsToPython(candidate.cv);
+                    const response  = await sendCvsToPython(candidate.cv);
                     console.log(response);
                     return response;
                 })
