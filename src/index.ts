@@ -16,10 +16,11 @@ import path from 'path';
 dotenv.config({ path: 'variables.env' });
 
 // Crear la carpeta de uploads si no existe
-const uploadDir = 'https://devjobs-backend-p8dd.onrender.com/uploads';
+const uploadDir = path.join(__dirname, 'uploads');
 
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
+  console.log(`Directorio ${uploadDir} creado.`);
 }
 
 connectDB();
