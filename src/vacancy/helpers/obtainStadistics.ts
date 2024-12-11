@@ -11,7 +11,11 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
     // const url = convertToUrl(filePath);
     
     // Convierte la URL a una ruta absoluta local
+    
+    console.log('file path', filePath);
+
     const absolutePath = path.resolve(filePath);
+    
     
     if (!fs.existsSync(absolutePath)) {
         throw new Error(`El archivo no existe: ${absolutePath}`);
