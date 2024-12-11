@@ -12,24 +12,25 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
     
     // Convierte la URL a una ruta absoluta local
     
+    const url = filePath.replace('src/','');
     console.log('file path', filePath);
 
-    const absolutePath = path.resolve(filePath);
-    
-    
-    if (!fs.existsSync(absolutePath)) {
-        throw new Error(`El archivo no existe: ${absolutePath}`);
-    }
 
-    const formData = new FormData();
-    formData.append("file", fs.createReadStream(absolutePath)); // Agrega el stream del archivo
+    //filepath = 'src/uploads/documentcv.pdf
+    const urlComplete = `https://devjobs-backend-p8dd.onrender.com/${url}`
+ //   const absolutePath = path.resolve(filePath);
+     console.log("URL completa generada:", urlComplete);
+
+    
+    // if (!fs.existsSync(absolutePath)) {
+    //     throw new Error(`El archivo no existe: ${absolutePath}`);
+    // }
+
+    // const formData = new FormData();
+    // formData.append("file", fs.createReadStream(absolutePath)); // Agrega el stream del archivo
 
     try {
-        const response = await axios.post(`${baseUrl}/information-cv`, formData, {
-            headers: {
-                ...formData.getHeaders(), // Incluye los encabezados generados por form-data
-            },
-        });
+        const response = await axios.post(`${baseUrl}/information-cv?url=${encodeURIComponent(urlComplete)}`);
         return response.data;
     } catch (error: any) {
         throw error.message;
