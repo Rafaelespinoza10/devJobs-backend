@@ -11,7 +11,7 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
     const url = convertToUrl(filePath);
     
     // Convierte la URL a una ruta absoluta local
-    const absolutePath = path.resolve(url.replace(process.env.BASE_URL!, "src"));
+    const absolutePath = path.resolve(url);
     
     if (!fs.existsSync(absolutePath)) {
         throw new Error(`El archivo no existe: ${absolutePath}`);
@@ -33,8 +33,7 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
 }
 
 function convertToUrl(filePath: string): string {
-    const baseUrl = process.env.BASE_URL;
     const normalizedPath = filePath.replace(/\\/g, '/');
     const cleanedPath = normalizedPath.replace(/^src\//, '');
-    return `${baseUrl}/${cleanedPath}`;
+    return `src/${cleanedPath}`;
 }
