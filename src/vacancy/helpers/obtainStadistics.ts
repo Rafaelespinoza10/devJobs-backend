@@ -8,10 +8,10 @@ dotenv.config({ path: 'variables.env' });
 
 export async function sendCvsToPython(filePath: string): Promise<any> {
     const baseUrl = process.env.PYTHONSERVER;
-    const url = convertToUrl(filePath);
+    // const url = convertToUrl(filePath);
     
     // Convierte la URL a una ruta absoluta local
-    const absolutePath = path.resolve(url);
+    const absolutePath = path.resolve(filePath);
     
     if (!fs.existsSync(absolutePath)) {
         throw new Error(`El archivo no existe: ${absolutePath}`);
@@ -32,6 +32,9 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
     }
 }
 
+
+
+//'src/uploads/document.cv'
 function convertToUrl(filePath: string): string {
     const normalizedPath = filePath.replace(/\\/g, '/');
     const cleanedPath = normalizedPath.replace(/^src\//, '');
