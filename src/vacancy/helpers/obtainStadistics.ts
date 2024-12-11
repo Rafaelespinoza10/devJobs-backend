@@ -31,6 +31,7 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
 
     try {
         const response = await axios.post(`${baseUrl}/information-cv`, { url: urlComplete,});
+        console.log('data', response.data);
         return response.data;
     } catch (error: any) {
         throw error.message;

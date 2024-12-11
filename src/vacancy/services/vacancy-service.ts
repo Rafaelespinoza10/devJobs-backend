@@ -157,14 +157,15 @@ export class VacancyService {
                     if (!candidate.cv) {
                         throw new Error(`El candidato ${candidate.name} no tiene un CV válido`);
                     }
-                    return sendCvsToPython(candidate.cv);
+                    const response  = sendCvsToPython(candidate.cv);
+                    console.log(response);
+                    return response;
                 })
             );
             // Retorna las respuestas al cliente
             return responses;
         } catch (ex: any) {
-            console.error('Ocurrió un error al obtener las estadísticas:', ex.message);
-            throw new Error('Ocurrió un error al obtener las estadísticas: ' + ex.message);
+            throw new Error('Ocurrió un error al obtener las estadísticas: ' + ex);
         }
     }
     
