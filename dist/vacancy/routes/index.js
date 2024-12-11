@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const vacancy_controller_1 = require("../controller/vacancy-controller");
+const authorization_1 = require("../../auth/middleware/authorization");
+const multer_1 = require("../../auth/middleware/multer");
+const newVacancyController = new vacancy_controller_1.VacancyController;
+const router = express_1.default.Router();
+router.get('/obtain-vacancy/:id', newVacancyController.getVacancyForId);
+router.get('/all', newVacancyController.obtainAllVacancy);
+router.post('/create-vacancy', authorization_1.authorized, newVacancyController.createVacancy);
+router.put('/edit-vacancy/:id', authorization_1.authorized, newVacancyController.editVacancy);
+router.put('/edit-candidates-by-vacancyId/:id', multer_1.uploadDocument.single('cv'), newVacancyController.editCandidatesByVacancyId);
+router.delete('/delete-vacancy/:id', authorization_1.authorized, newVacancyController.deleteVacancy);
+router.get('/obtain-vacancy-by-userId/:id', authorization_1.authorized, newVacancyController.getVacancyByUserId);
+router.post('/obtain-vacancies-by-planUser/:id', authorization_1.authorized, newVacancyController.getVacanciesByUserIdPlan);
+router.post('/obtain-stadistics-candidates/:id/:userId', authorization_1.authorized, newVacancyController.obtainStadistcsByCandidates);
+exports.default = router;
