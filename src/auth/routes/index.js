@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const auth_controller_1 = require("../controller/auth-controller");
+const authorization_1 = require("../middleware/authorization");
+const validations_1 = require("../helpers/validations");
+const multer_1 = require("../middleware/multer");
+const validations = new validations_1.Validations();
+const newUserController = new auth_controller_1.UserController(validations);
+const routerAuth = express_1.default.Router();
+routerAuth.post('/create-user', newUserController.createUser);
+routerAuth.post('/login', newUserController.login);
+routerAuth.get('/profile', authorization_1.authorized, newUserController.profile);
+routerAuth.get('/obtain-user-by-Id/:id', newUserController.obtainUserById);
+routerAuth.post('/update-user-by-Id/:id', authorization_1.authorized, multer_1.upload.single('image'), newUserController.updateUserById);
+routerAuth.post('/update-plan-user/:id', authorization_1.authorized, newUserController.updatePlanByUser);
+exports.default = routerAuth;
