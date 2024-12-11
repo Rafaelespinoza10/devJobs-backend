@@ -30,7 +30,7 @@ export async function sendCvsToPython(filePath: string): Promise<any> {
     // formData.append("file", fs.createReadStream(absolutePath)); // Agrega el stream del archivo
 
     try {
-        const response = await axios.post(`${baseUrl}/information-cv?url=${encodeURIComponent(urlComplete)}`);
+        const response = await axios.post(`${baseUrl}/information-cv`, { url: urlComplete,});
         return response.data;
     } catch (error: any) {
         throw error.message;
