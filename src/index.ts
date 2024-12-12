@@ -29,7 +29,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'https://dev-jobs-app-rafael-morenos-projects-c25eb243.vercel.app',
+  origin: 'https://cozy-gumdrop-2aefec.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
   credentials: true,
