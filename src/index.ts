@@ -27,8 +27,9 @@ connectDB();
 
 const app = express();
 
+
 app.use(cors({
-  origin: 'https://dev-jobs-1dclc9mwn-rafael-morenos-projects-c25eb243.vercel.app',
+  origin: 'https://dev-jobs-app-rafael-morenos-projects-c25eb243.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
   credentials: true,
